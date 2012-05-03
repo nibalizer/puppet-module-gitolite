@@ -1,0 +1,50 @@
+Alias /git /var/www/gitweb-caching
+<Directory /var/www/gitweb-caching>
+   Allow from all
+   AllowOverride all
+   Order allow,deny
+   Options ExecCGI
+   <Files gitweb.cgi>
+   SetHandler cgi-script
+   </Files>
+</Directory>
+DirectoryIndex gitweb.cgi
+SetEnv  GITWEB_CONFIG  /etc/gitweb.conf
+
+# Suexec setup
+SuexecUserGroup <%= user %> <%= group %>
+
+# Set up appropriate GIT environments
+SetEnv GIT_PROJECT_ROOT <%= root %>/repositories
+SetEnv GIT_HTTP_EXPORT_ALL
+
+# Set up appropriate gitolite environment
+SetEnv GITOLITE_HTTP_HOME <%= root %>
+
+# To serve gitweb at the same url, use a ScriptAliasMatch to
+    # only those URLs that git http-backend can handle, and
+    # forward the rest to gitweb:
+    ScriptAliasMatch \
+            "(?x)^/(.*/(HEAD | \
+                            info/refs | \
+                            objects/(info/[^/]+ | \
+                                     [0-9a-f]{2}/[0-9a-f]{38} | \
+                                     pack/pack-[0-9a-f]{40}\.(pack|idx)) | \
+                            git-(upload|receive)-pack))$" \
+            /var/www/gitolite-suexec-wrapper.sh/$1
+
+    # We need gl-auth-command executable
+<Directory "/var/www/">
+    <Files "gitolite-suexec-wrapper.sh">
+        Order allow,deny
+        Allow from all
+    </Files>
+</Directory>
+
+    # Set up authentication to taste
+    #<Location />
+    #           AuthType Basic
+    #           AuthName "Private Git Access"
+    #           Require valid-user
+    #           AuthUserFile /srv/git/passfile
+    #</Location>

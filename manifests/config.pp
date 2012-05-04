@@ -15,7 +15,7 @@ class gitolite::config {
     file {
         $gitolite::root:
             ensure  => directory,
-            path    => $gitolite::root
+            path    => $gitolite::root,
             mode    => '0644';
 
         'gitolite.conf':

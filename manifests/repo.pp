@@ -10,6 +10,6 @@ define gitolite::repo ($owner='Mozilla',
         path    => "${gitolite::root}/.gitolite.conf.d/${order}-${title}",
         content => template('gitolite/repo.erb'),
         mode    => '0644',
-        notify  => Exec['gitolite::generate-repo-list']
+        notify  => Exec['gitolite::config::generate-repo-list']
     }
 }

@@ -21,13 +21,13 @@ Some limitations are:
 * The define-class could be better.  Ideally each repo would be it's own type,
   however I haven't had time to sit down and code that part out yet.
 
->    node "git1.example.com" {
->        class { 'gitolite':
->            ldap => true,
->            ldap_bindpw => "mypassword",
->    }
->    repo { "myrepo":
->        order  => 1,
->        desc   => "my first repo",
->        rwplus => 'ben.kero@gmail.com';
->    }
+    node "git1.example.com" {
+        class { 'gitolite':
+            ldap => true,
+            ldap_bindpw => "mypassword",
+    }
+    repo { "myrepo":
+        order  => 1,
+        desc   => "my first repo",
+        rwplus => 'ben.kero@gmail.com';
+    }

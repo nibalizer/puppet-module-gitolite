@@ -47,7 +47,9 @@ email="${1}"
 # Set needed LDAP search tool options for the query
 ldap_host="pm-ns.mozilla.org"
 ldap_binddn="uid=bindssh1,ou=logins,dc=mozilla"
-ldap_bindpw="<%=bindpw%>"
+ldap_host="<%=ldap_host%>"
+ldap_binddn="<%=ldap_user%>"
+ldap_bindpw="<%=ldap_pass%>"
 ldap_searchbase="ou=groups,dc=mozilla"
 ldap_scope="sub"
 

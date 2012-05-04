@@ -50,14 +50,14 @@ class gitolite::config {
 
         'hooks-common':
             ensure  => directory,
-            require => File['hooks']
+            require => File['hooks'],
             mode    => '0755';
 
         'update.secondary':
             ensure  => present,
             path    => "$gitolite::root/.gitolite/hooks/common/update.secondary",
             mode    => '0755',
-            require => File['hooks-common']
+            require => File['hooks-common'],
             source  => 'puppet:///modules/gitolite/update.secondary';
 
         'gitolite-hooks':
@@ -67,7 +67,7 @@ class gitolite::config {
             purge   => true,
             recurse => true,
             ignore  => '.svn',
-            require => File['hooks-common']
+            require => File['hooks-common'],
             source  => 'puppet:///modules/gitolite/update.secondary.d';
 
         'gitolite-suexec-wrapper.sh':

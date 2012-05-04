@@ -8,7 +8,7 @@ define gitolite::repo ($owner='Mozilla',
     file {"${title}":
         ensure  => present,
         path    => "${gitolite::root}/.gitolite.conf.d/${order}-${title}",
-        content => template('gitolite/repo.pp'),
+        content => template('gitolite/repo.erb'),
         mode    => '0644',
         notify  => Exec['gitolite::generate-repo-list']
     }

@@ -6,7 +6,6 @@
 #   root: Directory to store root filesystem (default: /var/lib/gitolite)
 #   user: User to run gitolite as (default: gitolite)
 #   group: Group to run gitolite as (default: gitolite)
-#   repos: Variable to enumerate repositories (default: '')
 #   ldap: Whether to use ldap to manage users (default: false)
 #   ldap_bind_pw: LDAP's bind password (default: '')
 #
@@ -21,14 +20,12 @@
 #   class { "gitolite":
 #       $ldap     => true,
 #       $ldap_bind_pw = 'hunter2'
-#       $repos (see README.md)
 #   }
 #
 # [Remember: No empty lines between comments and class definition]
 class gitolite ($root='/var/lib/gitolite',
                 $user='gitolite',
                 $group='gitolite',
-                $repos=[],
                 $ldap=false,
                 $ldap_bind_pw=''
     ) {

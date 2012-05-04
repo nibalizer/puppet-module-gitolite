@@ -45,7 +45,7 @@ class gitolite::config {
 
         'hooks':
             ensure  => directory,
-            mode    => '0755'
+            mode    => '0755',
             require => File[$gitolite::root];
 
         'hooks-common':

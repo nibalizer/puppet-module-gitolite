@@ -38,6 +38,7 @@ class gitolite::config {
 
         'hooks':
             ensure  => directory,
+            path    => "$gitolite::root/.gitolite/hooks",
             mode    => '0755',
             require => File[$gitolite::root];
 

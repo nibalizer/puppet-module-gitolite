@@ -22,20 +22,12 @@ Some limitations are:
   however I haven't had time to sit down and code that part out yet.
 
 >    node "git1.example.com" {
->        include base-httpd # You'll want to make your own base-httpd somehow (or just install httpd)
->        include openldap::client # You'll want to install openldap on your own if you plan to use ldap
 >        class { 'gitolite':
 >            ldap => true,
 >            ldap_bindpw => "mypassword",
->            repos => ['repo     repotest1
->                         RW+     = @all
->                         R       = gitweb
->                         repotest1 "Ben Kero" = "Baby\'s first repo"',
->                      'repo     opentoall
->                         RW+     = @all
->                         opentoall "Ben Kero" = "Test Repository for or Make Benefit Glorious Corporation of Mozilla"
->                         config hooks.iscondemned = "true"',
->                      'repo    sysadmins
->                        RW+     = @sysadmins']
->        }
+>    }
+>    repo { "myrepo":
+>        order  => 1,
+>        desc   => "my first repo",
+>        rwplus => 'ben.kero@gmail.com';
 >    }

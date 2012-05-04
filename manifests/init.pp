@@ -42,8 +42,14 @@ class gitolite ($root='/var/lib/gitolite',
     if $ldap == true {
         $no_setup_authkeys = 1
         $enable_external_membership_program = true
-        if $ldap_bind_pw == '' {
-            fail('You probably need a bind password (ldap_bind_pw param)')
+        if $ldap_pass == '' {
+            fail('You probably need a bind password (ldap_pass param)')
+        }
+        if $ldap_user == '' {
+            fail('You probably need a bind username (ldap_user param)')
+        }
+        if $ldap_host == '' {
+            fail('You probably need a bind hostname (ldap_host param)')
         }
     } else {
         $no_setup_authkeys = 0

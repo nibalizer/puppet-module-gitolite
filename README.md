@@ -26,6 +26,7 @@ Some limitations are:
 >        include openldap::client # You'll want to install openldap on your own if you plan to use ldap
 >        class { 'gitolite':
 >            ldap => true,
+>            ldap_bindpw => "mypassword",
 >            repos => ['repo     repotest1
 >                         RW+     = @all
 >                         R       = gitweb

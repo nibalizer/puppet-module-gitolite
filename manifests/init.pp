@@ -1,28 +1,58 @@
-class gitolite ($root="/var/lib/gitolite",
-                $user="gitolite",
-                $group="gitolite",
+# Class: gitolite
+#
+# This module manages gitolite
+#
+# Parameters:
+#   root: Directory to store root filesystem (default: /var/lib/gitolite)
+#   user: User to run gitolite as (default: gitolite)
+#   group: Group to run gitolite as (default: gitolite)
+#   repos: Variable to enumerate repositories (default: '')
+#   ldap: Whether to use ldap to manage users (default: false)
+#   ldap_bind_pw: LDAP's bind password (default: '')
+#
+# Actions:
+#
+#   Installs, configures, and manages a gitolite instance
+#
+# Requires:
+#
+# Sample Usage:
+#
+#   class { "gitolite":
+#       $ldap     => true,
+#       $ldap_bind_pw = 'hunter2'
+#       $repos (see README.md)
+#   }
+#
+# [Remember: No empty lines between comments and class definition]
+class gitolite ($root='/var/lib/gitolite',
+                $user='gitolite',
+                $group='gitolite',
                 $repos=[],
                 $ldap=false,
-                $bindpw=""
+                $ldap_bind_pw=''
     ) {
 
     if $ldap == true {
         $no_setup_authkeys = 1
         $enable_external_membership_program = true
+        if $ldap_bind_pw == '' {
+            fail('You probably need a bind password (ldap_bind_pw param)')
+        }
     } else {
         $no_setup_authkeys = 0
         $enable_external_membership_program = false
     }
 
 
-    Yumrepo <| title == "epel" |>
-    Yumrepo <| title == "mozilla" |>
+    Yumrepo <| title == 'epel' |>
+    Yumrepo <| title == 'mozilla' |>
 
     #### This is unnecessary with other mozilla classes ####
-    #yumrepo { "epel":
+    #yumrepo { 'epel':
     #    mirrorlist => "http://mirrors.fedoraproject.org/mirrorlist?repo=epel-6&arch=$basearch",
-    #    enabled => 1,
-    #    gpgcheck => 0,
+    #    enabled    => 1,
+    #    gpgcheck   => 0,
     #}
 
     class {
@@ -33,3 +63,4 @@ class gitolite ($root="/var/lib/gitolite",
         'gitolite::config':;
     }
 }
+

@@ -1,0 +1,11 @@
+repo    <%=name%>
+<%  if brplus != "" %>
+    RW+     = <%=rwplus%>
+<% end %>
+<%  if rw != "" then%>
+    RW      = <%=rw%>
+<% end %>
+<%  if r != "" then%>
+    R       = <%=r%>
+<% end %>
+    <%=name%> "<%=owner%>" = "<%=desc%>"

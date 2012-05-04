@@ -115,7 +115,7 @@ class gitolite::config {
             cwd         => "$gitolite::root/.gitolite.conf.d",
             command     => '/usr/local/bin/compile-gitoliteconf',
             user        => $gitolite::user,
-            require     => [File['concat-gl-conf'], File['glconfdir']],
+            require     => [File['concat-gl-conf'], File['gl-conf-dir']],
             environment => "HOME=$gitolite::root",
             refreshonly => true;
         'update-conf':

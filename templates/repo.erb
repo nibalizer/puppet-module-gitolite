@@ -1,11 +1,14 @@
 repo    <%=name%>
-<%  if brplus != "" %>
+<% if brplus != "" %>
     RW+     = <%=rwplus%>
 <% end %>
-<%  if rw != "" then%>
+<% if rw != "" then%>
     RW      = <%=rw%>
 <% end %>
-<%  if r != "" then%>
+<% if r != "" then%>
     R       = <%=r%>
 <% end %>
+<% hooks.each do |hook| %>
+    config hooks.<%=hook%>
+<%end -%>
     <%=name%> "<%=owner%>" = "<%=desc%>"

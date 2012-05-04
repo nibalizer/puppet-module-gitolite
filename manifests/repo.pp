@@ -1,7 +1,7 @@
 define gitolite::repo ($path,
                        $owner='Mozilla',
                        $desc='This repo needs a description',
-                       $order='999'
+                       $order='999',
                        $hooks=[]) {
     file {"${title}":
         ensure  => present,

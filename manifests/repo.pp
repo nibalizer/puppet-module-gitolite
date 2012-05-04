@@ -4,7 +4,7 @@ define gitolite::repo ($path,
                        $order='999',
                        $rwplus='',
                        $rw='',
-                       $r=''
+                       $r='',
                        $hooks=[]) {
     file {"${title}":
         ensure  => present,

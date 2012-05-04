@@ -106,7 +106,7 @@ class gitolite::config {
     exec {
         'generate-repo-list':
             cwd         => "$gitolite::root/.gitolite.conf.d",
-            command     => "/usr/local/bin/concat-gl-conf $gitolite::root/.gitolite.conf.d/* $gitolite::root/.gitolite/conf/gitolite.conf",
+            command     => '/usr/local/bin/concat-gl-conf',
             user        => $gitolite::user,
             require     => [File['concat-gl-conf'], File['gl-conf-dir']],
             environment => "HOME=$gitolite::root",

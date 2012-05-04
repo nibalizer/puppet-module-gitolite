@@ -23,8 +23,11 @@ Some limitations are:
 
     node "git1.example.com" {
         class { 'gitolite':
-            ldap => true,
-            ldap_bindpw => "mypassword",
+            ldap            => true,
+            ldap_bindpw     => "mypassword",
+            ldap_user       => "uid=mybinduser,ou=logins,dc=mycompany",
+            ldap_pass       => "hunter2",
+            ldap_searchbase => "ou=groups,dc=mycompany",
     }
     repo { "myrepo":
         order  => 1,

@@ -12,6 +12,7 @@
 #   ldap_host: LDAP's bind host (default: '')
 #   ldap_user: LDAP's bind username (default: '')
 #   ldap_pass: LDAP's bind password (default: '')
+#   ldap_searchbase: LDAP's searchbase (default: '')
 #
 # Actions:
 #
@@ -27,6 +28,7 @@
 #       $ldap_host => 'localhost',
 #       $ldap_user => 'gitolite',
 #       $ldap_pass => 'hunter2'
+#       $ldap_searchbase => 'ou=groups,dc=mycompany'
 #   }
 #
 # [Remember: No empty lines between comments and class definition]
@@ -36,7 +38,8 @@ class gitolite ($root='/var/lib/gitolite',
                 $ldap=false,
                 $ldap_host='',
                 $ldap_user='',
-                $ldap_pass=''
+                $ldap_pass='',
+                $ldap_searchbase=''
     ) {
 
     if $ldap == true {
@@ -50,6 +53,9 @@ class gitolite ($root='/var/lib/gitolite',
         }
         if $ldap_host == '' {
             fail('You probably need a bind hostname (ldap_host param)')
+        }
+        if $ldap_searchbase == '' {
+            fail('You probably need a bind search base (ldap_searchbase param)')
         }
     } else {
         $no_setup_authkeys = 0
